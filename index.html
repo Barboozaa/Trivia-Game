@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia or Whatever</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" /> -->
-    <script src="assets/js/app.js"></script>
+    
+    <!-- When I link the scripts in the head, they don't work. Also it throws an error. -->
+    <!-- when it's linked in the body, it works and there is no error? -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- <script src="assets/js/app.js"></script> -->
 </head>
 <body>
+    <!-- Heading/title -->
+    <header class="header">
+        <h1 class="title">Trivia I guess</h1>
+    </header>
+
+    <div class="content-wrapper">
+
+        <div>
+            <!-- Timer -->
+            <h3 class="timer"></h3>
+        </div>
+
+        <div>
+            <!-- (Hidden) Right or Wrong gif and "The Correct Answer is" -->
+            <h2 class="rightWrong"></h2>
+        </div>
+
+        <div>
+            <!-- Question -->
+            <h3 class="question"></h3>
+        </div>
+
+        <div>
+            <!-- Answer choices -->
+            <p id="choice1"></p>
+            <p id="choice2"></p>
+            <p id="choice3"></p>          
+            <p id="choice4"></p>
+        </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
     
 </body>
 </html>
