@@ -1,7 +1,58 @@
+$(document).ready(function() {
+    console.log("Hola Binches");
 // Game will need to be written in a way that it can be played again without refreshing the page*** 
+
+// Global Vars :
+var startButtonPressed = false;
+console.log(startButtonPressed);
+
+var timerRunning = false;
+
+var timerInterval
+
+var timer = {
+
+    time: 30,
+    
+    start: function() {
+        if (!timerRunning) {
+            timerInterval = setInterval(timer.count, 1000);
+            timerRunning = true;
+        };
+    },
+
+    stop: function() {
+        clearInterval(timerInterval);
+        timerRunning = false;
+    },
+
+    count: function() {
+        $(".timer").text("Timer : " + timer.time);            
+        timer.time--;
+
+        if (timer.time === 0) {
+            timer.stop();
+            $(".timer").text("Time's Up!")
+        }
+      }
+}
 
 // Display start button
     // when hit, show question, answers, and timer (30 seconds)
+$(".startButton").on("click", function() {
+    // Hides start button
+    startButtonPressed = true;
+    $(".startButton").hide();
+    console.log(startButtonPressed);
+
+    // Call gameSet function
+    timer.start();
+    gameSet();
+});
+
+function gameSet() {
+    
+}
 
 // Display question, answer choices, and timer
     // Timer Ticks at 1 second intervals, put reset so interval won't compound
@@ -15,12 +66,12 @@
     // Display timeouts (if there are none, don't. Idk how this will work out, but good luck)
     // ***Play again button that DOES NOT refresh the page, just starts the came over***
 
-document.getElementById("choice1").innerHTML = "js test";
 
-$(".question").text("jQ test");
+    //document.ready is needed for it to work in the head tag
+// document.getElementById("choice1").innerHTML = "js test";
 
-console.log("js console test");
+// $(".question").text("jQ test");
 
-$(document).ready(function() {
-    console.log("jQ console test");
-});
+// console.log("js console test");
+
+}); // ends the document ready
