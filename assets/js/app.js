@@ -4,38 +4,63 @@ $(document).ready(function() {
 
 // Global Vars :
 var startButtonPressed = false;
-console.log(startButtonPressed);
+console.log("SBP: " + startButtonPressed);
+
+var questions = {
+    "q1": "qwerty", 
+    "q2": "qwerty", 
+    "q3": "qwerty", 
+    "q4": "qwerty", 
+    "q5": "qwerty"};
+
+var answers = {
+    "q1":["1", "2", "3", "4"],
+    "q2":["1", "2", "3", "4"],
+    "q3":["1", "2", "3", "4"],
+    "q4":["1", "2", "3", "4"],
+    "q5":["1", "2", "3", "4"]
+};
+
+var correctAnswers = {
+    "q1":"1",
+    "q2":"1",
+    "q3":"1",
+    "q4":"1",
+    "q5":"1"
+};
 
 var timerRunning = false;
 
-var timerInterval
+var timerInterval;
 
 var timer = {
 
-    time: 30,
+    time: 10,
+
+    count: function() {
+        $(".timer").text("Timer : " + timer.time); 
+        if (timer.time != 0) {
+            timer.time--;            
+        } else {
+            timer.stop();
+            $(".timer").text("Time's Up!")            
+        }
+      },
     
     start: function() {
         if (!timerRunning) {
-            timerInterval = setInterval(timer.count, 1000);
             timerRunning = true;
+            timerInterval = setInterval(timer.count, 1000);
+            timer.count();
         };
     },
 
     stop: function() {
         clearInterval(timerInterval);
         timerRunning = false;
-    },
-
-    count: function() {
-        $(".timer").text("Timer : " + timer.time);            
-        timer.time--;
-
-        if (timer.time === 0) {
-            timer.stop();
-            $(".timer").text("Time's Up!")
-        }
-      }
-}
+        time = 30;
+    }
+};
 
 // Display start button
     // when hit, show question, answers, and timer (30 seconds)
@@ -43,16 +68,21 @@ $(".startButton").on("click", function() {
     // Hides start button
     startButtonPressed = true;
     $(".startButton").hide();
-    console.log(startButtonPressed);
+    console.log("SBP: " + startButtonPressed);
 
     // Call gameSet function
-    timer.start();
     gameSet();
 });
 
 function gameSet() {
-    
-}
+    timer.start();
+    $(".question").text(questions.q1)
+    answers.q1.forEach(function(x) {
+        var choice = $("<p>");
+        choice.text(x);
+        $("#choices").append(choice);
+    })
+};
 
 // Display question, answer choices, and timer
     // Timer Ticks at 1 second intervals, put reset so interval won't compound
