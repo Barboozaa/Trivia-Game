@@ -5,8 +5,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".buttons", function () {
-        game.guessChecker();  
-        console.log($(this).text());
+        var buttonClicked = $(this).text()
+        game.guessChecker(buttonClicked);  
     });
 
     var game = {
@@ -99,7 +99,7 @@ $(document).ready(function () {
                 $(".timer").empty();
                 $(".question").empty();
                 $("#choices").empty();
-                resultTimeout = setTimeout(game.guessResult, 5000);
+                resultTimeout = setTimeout(game.guessResult, 3000);
                 $(".rightWrong").text("Out of time! The answer was " + Object.values(game.correctAnswers)[game.currentQuestion]);
             }
             else if (game.currentQuestion === Object.keys(game.questions).length) {
@@ -116,21 +116,19 @@ $(document).ready(function () {
             }
         },
 
-        guessChecker: function () {
+        guessChecker: function (buttonClicked) {
 
             var resultTimeout;
 
             var currentAnswer = Object.values(game.correctAnswers)[game.currentQuestion];
             
-            var input = $(this).text();
-
-            if (input === currentAnswer) {
+            if (buttonClicked === currentAnswer) {
                 game.correct++;
                 clearInterval(game.timerInterval);
                 $(".timer").empty();
                 $(".question").empty();
                 $("#choices").empty();
-                resultTimeout = setTimeout(game.guessResult, 5000);
+                resultTimeout = setTimeout(game.guessResult, 3000);
                 $(".rightWrong").html("Correct!");
             } else {
                 game.incorrect++;
@@ -138,7 +136,7 @@ $(document).ready(function () {
                 $(".timer").empty();
                 $(".question").empty();
                 $("#choices").empty();
-                resultTimeout = setTimeout(game.guessResult, 5000);
+                resultTimeout = setTimeout(game.guessResult, 3000);
                 $(".rightWrong").html("Wrong! The answer was " + currentAnswer);
             }
         },
