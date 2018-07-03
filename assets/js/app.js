@@ -9,6 +9,8 @@ $(document).ready(function () {
         game.guessChecker(buttonClicked);  
     });
 
+    $(".contentWrapper").hide();
+
     var game = {
 
         questions: {
@@ -22,9 +24,9 @@ $(document).ready(function () {
         answers: {
             q1: ["Fighter", "Druid", "Cook", "Monk"],
             q2: ["Divination", "Necromancy", "Conjuration", "Lying"],
-            q3: ["Dragons", "A Literal Army", "Goblins", "Old People"],
-            q4: ["Elves", "Halflings", "Dwarves", "Orcs"],
-            q5: ["Punchy Style", "Really Hard Kick", "Stunning Fist", "Super Fist of the Nose Hair"]
+            q3: ["Dragons", "Goblins", "A Literal Army", "Old People"],
+            q4: ["Elves", "Halflings", "Orcs", "Dwarves"],
+            q5: ["Stunning Fist", "Punchy Style", "Really Hard Kick", "Super Fist of the Nose Hair"]
         },
 
         correctAnswers: {
@@ -61,7 +63,7 @@ $(document).ready(function () {
             $("#choices").empty();
             $(".results").empty();
 
-            $(".timer").text(game.timer);
+            $(".timer").text("Time Left: " + game.timer);
 
             $(".startButton").hide();
 
@@ -72,7 +74,7 @@ $(document).ready(function () {
 
             game.timer = 10;
 
-            $(".timer").text(game.timer);
+            $(".timer").text("Time Left: " + game.timer);
 
             if (!game.timerOn) {
                 game.timerInterval = setInterval(game.timerRunning, 1000);
@@ -90,7 +92,7 @@ $(document).ready(function () {
 
         timerRunning: function () {
             if (game.timer > -1 && game.currentQuestion < Object.keys(game.questions).length) {
-                $(".timer").text(game.timer);
+                $(".timer").text("Time Left: " + game.timer);
                 game.timer--;
             } else if (game.timer === -1) {
                 game.unanswered++;
@@ -105,13 +107,14 @@ $(document).ready(function () {
             else if (game.currentQuestion === Object.keys(game.questions).length) {
 
                 $(".results").html(
-                    "<h3>Check out your loot</h3>" +
+                    "<h2>Check out your loot</h2>" +
                     "<p>Correct: " + game.correct + "</p>" +
                     "<p>Incorrect: " + game.incorrect + "</p>" +
                     "<p>Unaswered: " + game.unanswered + "</p>"
                 );
                 $(".question").empty();
                 $(".timer").empty();
+                $(".startButton").attr("id", "move");
                 $(".startButton").show();
             }
         },
